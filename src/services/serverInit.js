@@ -1,3 +1,4 @@
+import { InternalServerError } from "../errors/TypeErrors.js";
 
 export const serverInit = (app, port) => {
     try {
@@ -5,6 +6,6 @@ export const serverInit = (app, port) => {
             console.log(`Servidor Corriendo en el puerto ${port}`);
         });
     } catch (error) {
-        console.error(`Error al iniciar el servidor. ERROR: ${error}`);
+        throw new InternalServerError(`Error al inicializar el Servidor en el puerto ${port}`, error);
     }
 }
