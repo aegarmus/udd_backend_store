@@ -1,8 +1,15 @@
 import { registerUser } from "../services/auth/register.service.js"
+import { buildFileUrl } from "../utils/files/buildFileUrl.js";
+import { formatUserData } from "../utils/format/formatUser.js";
 
 export const register = async(req, res, next) => {
     try {
-        const user = await registerUser(req.body);
+        let imageUrl = ''
+        if(req.file) imageUrl = buildFileUrl(req, req.file.filename, 'usuarios');
+
+        const userData = formatUserData(req.body, imageUrl)
+
+        const user = await registerUser(userData);
         res.status(201).json({
             message: "Usuario Creado con éxito",
             status: 201,

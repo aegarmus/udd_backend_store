@@ -30,6 +30,18 @@ export class AuthError extends CustomError {
     }
 }
 
+export class FileServiceError extends CustomError {
+    constructor(message, details) {
+        super(message || `Error al manipular o generar los archivos`, 500, details)
+    }
+}
+
+export class FormatError extends CustomError {
+    constructor(message, details) {
+        super(message || 'Error al formatear los datos', 500, details)
+    }
+}
+
 export class InternalServerError extends CustomError {
   constructor(message, details) {
     super(message || "Error interno del Servidor", 500, details);
