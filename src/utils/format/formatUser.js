@@ -1,4 +1,4 @@
-import { FormatError } from "../../errors/TypeErrors";
+import { FormatError } from "../../errors/TypeErrors.js";
 
 export const formatUserData = (data, image) => {
     try {
