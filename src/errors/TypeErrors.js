@@ -24,6 +24,12 @@ export class UploadFilesError extends CustomError {
     }
 }
 
+export class AuthError extends CustomError {
+    constructor(message, details) {
+        super(message || "Error al manipular datos de autenticación",  500, details)
+    }
+}
+
 export class InternalServerError extends CustomError {
   constructor(message, details) {
     super(message || "Error interno del Servidor", 500, details);
