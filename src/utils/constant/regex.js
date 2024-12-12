@@ -1,0 +1,1 @@
+export const REGEX_URI = /^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/;
