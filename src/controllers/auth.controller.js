@@ -1,5 +1,7 @@
+import { NotFoundError } from "../errors/TypeErrors.js";
 import { loginService } from "../services/auth/login.js";
 import { registerUser } from "../services/auth/register.js"
+import { updateUserPasswordService } from "../services/auth/updateUserPassword.js";
 import { buildFileUrl } from "../utils/files/buildFileUrl.js";
 import { formatUserData } from "../utils/format/formatUser.js";
 
@@ -46,6 +48,25 @@ export const login = async(req, res, next) => {
         })
     } catch (error) {
         console.error(error)
+        next(error)
+    }
+}
+
+export const updateUserPassword = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { oldPassword, newPassword } = req.body;
+
+        if(req.user.uid !== id) throw new AuthError('No cuentas con autización para cambiar esta contraseña')
+
+        const user = await updateUserPasswordService(id, oldPassword, newPassword);
+        if(!user) throw new NotFoundError('No se encontró el usuario')
+
+        res.status(200).json({
+            message: "Contraseña Actualizada con éxito",
+            status: 200
+        })
+    }catch(error){
         next(error)
     }
 }
