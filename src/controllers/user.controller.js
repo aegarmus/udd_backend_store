@@ -1,6 +1,6 @@
-import { NotFoundError } from "../errors/TypeErrors.js";
+import { NotFoundError, ValidationError } from "../errors/TypeErrors.js";
 import { User } from "../models/User.model.js"
-import { updateUserService } from "../services/user/updateUser.js";
+import { updateUserImageService, updateUserService } from "../services/user/updateUser.js";
 
 
 export const getAllUsers = async(req, res, next) => {
@@ -52,3 +52,28 @@ export const updateUser = async(req, res, next) => {
         next(error)
     }
 }
+
+export const updateUserImage = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        if(req.file){ 
+            imageUrl = buildFileUrl(req, req.file.filename, 'usuarios')
+        } else {
+            throw new ValidationError('No se ha súbido ninguna imagen');
+        };
+
+        const user = await updateUserImageService(id, imageUrl);
+        if (!user) throw new NotFoundError(`Usuario no encontrado`);
+
+        res.status(201).json({
+          message: "Usuario actualizado con éxito",
+          status: 201,
+          data: user,
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+

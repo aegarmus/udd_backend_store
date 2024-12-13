@@ -1,4 +1,5 @@
-import { InternalServerError } from "../../errors/TypeErrors";
+import { InternalServerError } from "../../errors/TypeErrors.js";
+import { User } from "../../models/User.model.js";
 
 
 export const updateUserService = async(id, updateData) => {
@@ -22,5 +23,14 @@ export const updateUserService = async(id, updateData) => {
         return user;
     } catch (error) {
         throw new InternalServerError('Error al procesar el servicio de actualización de usuario', error)
+    }
+}
+
+export async function updateUserImageService(id, imageUrl) {
+    try {
+        const user = await User.findOneAndUpdate({ _id: id, activo: true }, { imagen: imageUrl }, { new: true }).select("-password -activo");
+        return user;
+    } catch (error) {
+        throw new InternalServerError("Error al procesar el servicio de actualización de usuario", error);
     }
 }

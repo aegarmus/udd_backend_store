@@ -8,7 +8,6 @@ export const register = async(req, res, next) => {
         console.log(req.body)
         let imageUrl = ''
         if(req.file) imageUrl = buildFileUrl(req, req.file.filename, 'usuarios');
-        console.log(imageUrl)
 
         const userData = formatUserData(req.body, imageUrl)
 
