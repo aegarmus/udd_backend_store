@@ -47,3 +47,22 @@ export const getProductById = async(req, res, next) => {
         next(error)
     }
 }
+
+
+export const updateProduct = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByIdAndUpdate(id, req.body, {
+          new: true,
+          runValidators: true,
+        }).select("-__v");
+        
+        res.status(201).json({
+            message: 'Producto actualizado con éxito',
+            status: 201,
+            data: product
+        })
+    } catch (error) {
+        next(error)
+    }
+}
