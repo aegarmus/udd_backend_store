@@ -1,5 +1,5 @@
-import { loginService } from "../services/auth/login.service.js";
-import { registerUser } from "../services/auth/register.service.js"
+import { loginService } from "../services/auth/login.js";
+import { registerUser } from "../services/auth/register.js"
 import { buildFileUrl } from "../utils/files/buildFileUrl.js";
 import { formatUserData } from "../utils/format/formatUser.js";
 
