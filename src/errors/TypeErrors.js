@@ -42,6 +42,12 @@ export class FormatError extends CustomError {
     }
 }
 
+export class MailServiceError extends CustomError {
+    constructor(message, details) {
+        super(message || 'Error en el servicio de email', 500, details)  
+    }
+}
+
 export class InternalServerError extends CustomError {
   constructor(message, details) {
     super(message || "Error interno del Servidor", 500, details);
