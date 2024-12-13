@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createProduct, deleteProduct, getAllProduct, getProductById, updateProduct } from "../controllers/product.controller.js";
+import { createProduct, deleteProduct, getAllProduct, getProductById, updateProduct, updateProductImage } from "../controllers/product.controller.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { uploadPhotoMiddleware } from "../middlewares/uploadFile.middlewares.js";
 
@@ -10,6 +10,7 @@ router.post('/', authMiddleware, uploadPhotoMiddleware('productos', 'file') , cr
 router.get('/', getAllProduct);
 router.get('/:id', getProductById);
 router.put('/:id', authMiddleware, updateProduct);
+router.put("/:id", authMiddleware, uploadPhotoMiddleware("productos", "file"), updateProductImage);
 router.delete('/:id', deleteProduct);
 
 
