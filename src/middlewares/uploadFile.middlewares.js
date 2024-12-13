@@ -1,6 +1,6 @@
 import multer from "multer"
-import { uploadFile } from "../services/files/multerConfig"
-import { FileServiceError } from "../errors/TypeErrors";
+import { uploadFile } from "../services/files/multerConfig.js"
+import { FileServiceError } from "../errors/TypeErrors.js";
 
 export const uploadPhotoMiddleware = (folder, fieldname) => {
     try {

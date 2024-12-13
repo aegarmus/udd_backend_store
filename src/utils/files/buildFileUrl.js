@@ -4,7 +4,7 @@ import { generateFileName } from "./generateFileName.js";
 
 export const buildFileUrl = (req, filename, folder) => {
     try {
-        if(!files) return null;
+        if(!filename) return null;
         const domain = `${req.protocol}://${req.get('host')}`;
         
         return `${domain}/uploads/${folder}/${filename}`

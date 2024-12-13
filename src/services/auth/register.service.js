@@ -4,7 +4,10 @@ import { hashPassword } from "../../utils/auth/hashPassword.js"
 
 export const registerUser = async({nombre, apellido, correo, telefono, password, direccion, imagen}) => {
     try {
+        console.log(password)
         const hashedPassword = await hashPassword(password);
+
+        console.log(hashPassword)
 
         const user = await User.create({
             nombre,

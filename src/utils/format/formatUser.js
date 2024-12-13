@@ -1,6 +1,6 @@
 import { FormatError } from "../../errors/TypeErrors.js";
 
-export const formatUserData = (data, image) => {
+export const formatUserData = (data, imagen) => {
     try {
         const {
           nombre,
@@ -32,7 +32,7 @@ export const formatUserData = (data, image) => {
           telefono,
           password,
           direccion,
-          image
+          imagen
         };
    
         
