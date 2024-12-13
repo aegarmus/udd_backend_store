@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors'
 
 import { serverInit } from './services/serverInit.js';
-import authRouter from './routes/auth.routes.js'
+import routes from './routes/index.js'
 
 
 const app = express();
@@ -13,6 +13,8 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/v1', authRouter)
+app.use("/uploads", express.static("public/uploads"));
+
+app.use('/api/v1', routes)
 
 serverInit(app, PORT)

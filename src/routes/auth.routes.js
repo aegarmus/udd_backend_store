@@ -4,7 +4,7 @@ import { uploadPhotoMiddleware } from '../middlewares/uploadFile.middlewares.js'
 
 const router = Router();
 
-router.post('/auth', uploadPhotoMiddleware('usuarios', 'file') , register);
+router.post('/', uploadPhotoMiddleware('usuarios', 'file') , register);
 router.post('/login', login)
 
 

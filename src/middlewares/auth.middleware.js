@@ -1,4 +1,5 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import jwt from "jsonwebtoken";
 import { AuthError } from "../errors/TypeErrors.js";
 
 dotenv.config();
@@ -16,6 +17,7 @@ export const authMiddleware = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
+        console.error(error)
         throw new AuthError('Token inválido o inesperado', error)
     }
 
