@@ -50,6 +50,8 @@ const userSchema = new Schema(
         message: "URL de imagen no válida",
       },
     },
+    resetPasswordToken: { type: String, default: null },
+    resetPasswordExprires: { type: Date, default: null }
   },
   { timestamps: true }
 );

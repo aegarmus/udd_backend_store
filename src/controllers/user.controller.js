@@ -1,5 +1,7 @@
 import { NotFoundError, ValidationError } from "../errors/TypeErrors.js";
 import { User } from "../models/User.model.js"
+import { forgotPasswordService } from "../services/auth/resetPassword/forgotPassword.js";
+import { resetPasswordService } from "../services/auth/resetPassword/resetPasssword.js";
 import { updateUserImageService, updateUserService } from "../services/user/updateUser.js";
 
 
@@ -110,3 +112,5 @@ export const restoreUser = async(req, res, next) => {
         
     }
 }
+
+

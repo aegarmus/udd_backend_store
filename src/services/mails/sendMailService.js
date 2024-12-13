@@ -1,15 +1,16 @@
 import { transporter } from "../../config/mail.config.js"
-import { MailServiceError } from "../../errors/TypeErrors";
+import { MailServiceError } from "../../errors/TypeErrors.js";
 
 
 
-export const sendMailService = async({ to, subject, message }) => {
+export const sendMailService = async({ to, subject, message, html = '' }) => {
     try {
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: to.join(', '),
+            to,
             subject,
-            text: message
+            text: message,
+            html
         }
 
         const infoData = await transporter.sendMail(mailOptions);

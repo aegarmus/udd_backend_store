@@ -1,6 +1,8 @@
 import { NotFoundError } from "../errors/TypeErrors.js";
 import { loginService } from "../services/auth/login.js";
 import { registerUser } from "../services/auth/register.js"
+import { forgotPasswordService } from "../services/auth/resetPassword/forgotPassword.js";
+import { resetPasswordService } from "../services/auth/resetPassword/resetPasssword.js";
 import { updateUserPasswordService } from "../services/auth/updateUserPassword.js";
 import { buildFileUrl } from "../utils/files/buildFileUrl.js";
 import { formatUserData } from "../utils/format/formatUser.js";
@@ -67,6 +69,30 @@ export const updateUserPassword = async(req, res, next) => {
             status: 200
         })
     }catch(error){
+        next(error)
+    }
+}
+
+
+export const forgotPassword = async(req, res, next) => {
+    try {
+        const { correo } = req.body;
+        const result = await forgotPasswordService(correo);
+        
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export const resetPassword = async(req, res, next) => {
+    try {
+        const { token, newPassword } = req.body;
+        const result = await resetPasswordService(token, newPassword);
+
+        res.status(200).json(result);
+    } catch (error) {
         next(error)
     }
 }
