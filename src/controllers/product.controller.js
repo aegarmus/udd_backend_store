@@ -32,3 +32,18 @@ export const getAllProduct = async(req, res, next) => {
         next(error)
     }
 }
+
+export const getProductById = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id).select('-__v')
+
+        res.status(200).json({
+            message: 'Producto obtenido con éxito',
+            status: 200,
+            data: product
+        })
+    } catch (error) {
+        next(error)
+    }
+}
