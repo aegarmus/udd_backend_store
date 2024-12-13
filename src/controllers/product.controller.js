@@ -19,3 +19,16 @@ export const createProduct = async(req, res, next) => {
         next(error)
     }
 }
+
+export const getAllProduct = async(req, res, next) => {
+    try {
+        const product = await Product.find().select('-__v');
+        res.status(200).json({
+            message: 'Productos obtenidos con éxito',
+            status: 200,
+            data: product
+        });
+    } catch (error) {
+        next(error)
+    }
+}
