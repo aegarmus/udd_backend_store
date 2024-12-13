@@ -66,3 +66,19 @@ export const updateProduct = async(req, res, next) => {
         next(error)
     }
 }
+
+
+export const deleteProduct = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByIdAndDelete(id).select('-__v');
+
+        res.status(200).json({
+            message: 'Producto Eliminado con éxito',
+            status: 200,
+            data: product
+        })
+    } catch (error) {
+        next(error);
+    }
+}
