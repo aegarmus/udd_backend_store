@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { REGEX_URI } from "../utils/constant/regex.JS";
+import { REGEX_URI } from "../utils/constant/regex.js";
 
 const { Schema, model } = mongoose;
 
