@@ -77,3 +77,36 @@ export const updateUserImage = async (req, res, next) => {
     }
 }
 
+export const deleteUser = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findOneAndUpdate({ _id: id, activo: true }, { activo: false }, { new: true }).select('-password -activo');
+
+        if(!user) throw new NotFoundError(`Usuario no encontrado`);
+
+        res.status(200).json({
+          message: "Usuario eliminado con éxito",
+          status: 200,
+          data: user,
+        });
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const restoreUser = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findOneAndUpdate({ _id: id, activo: false }, { activo: true }, { new: true }).select('-password -activo');
+
+        if(!user) throw new NotFoundError(`Usuario no encontrado`);
+
+        res.status(200).json({
+          message: "Usuario restaurado con éxito",
+          status: 200,
+          data: user,
+        });
+    } catch (error) {
+        
+    }
+}
