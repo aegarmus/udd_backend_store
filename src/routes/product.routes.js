@@ -10,7 +10,7 @@ router.post('/', authMiddleware, uploadPhotoMiddleware('productos', 'file') , cr
 router.get('/', getAllProduct);
 router.get('/:id', getProductById);
 router.put('/:id', authMiddleware, updateProduct);
-router.put("/:id", authMiddleware, uploadPhotoMiddleware("productos", "file"), updateProductImage);
+router.put("/:id/image", authMiddleware, uploadPhotoMiddleware("productos", "file"), updateProductImage);
 router.delete('/:id', deleteProduct);
 
 
