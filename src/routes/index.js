@@ -11,4 +11,5 @@ router.use('/users', userRouter);
 router.use('/product', productRouter);
 router.use("/sales", saleRoutes);
 
+
 export default router;
