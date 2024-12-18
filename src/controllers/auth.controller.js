@@ -26,7 +26,6 @@ export const register = async(req, res, next) => {
                 name: user.nombre,
                 apellido: user.apellido,
             },
-            token,
         });
     } catch (error) {
         console.error('Error Interno en register', error)

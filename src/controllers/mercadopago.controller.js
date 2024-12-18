@@ -1,30 +1,35 @@
-import mercadopago from "../config/mercadopago.config.js";
-
+import { Preference } from 'mercadopago'
+import client from '../config/mercadopago.config.js'
 
 export const createPreference = async(req, res, next) => {
     try {
-        const { cart, total } = req.body;
+        const { cart } = req.body;
 
-        const products = cart.map((product) => ({
+        //Vamos a estructura los datos de los productos del carrito - Debe ser idealmente un Array
+        const items = cart.map((product) => ({
             title: product.nombre,
-            unit_price: product.precio,
-            quantity: product.quantity,
-            currency_id: 'CLP'
+            unit_price: Number(product.precio),
+            quantity: Number(product.quantity),
+            currency_id: "CLP"
         }));
 
-        const preferences = {
-            products,
+        //Es el cuerpo de configuración de las preferencias de compra para MercadoPago
+        const body = {
+            items, //Debe tener un campo Item que sea un arreglo
             back_urls: {
-                success: 'http://localhost:3000/success',
-                failure: 'http://localhost:3000/failure',
-                pending: 'http://localhost:3000/pending'
+                success:'http://localhost:5173/mercadopago/status?status=approved',
+                failure:'http://localhost:5173/mercadopago/status?status=failure',
+                pending:'http://localhost:5173/mercadopago/status?status=pending'
             },
             auto_return: 'approved'
-        };
+        }
 
-        const response = await mercadopago.preferences.create(preferences);
-        res.status(200).json({ id: response.body.id })
+        const preference = new Preference(client);
+        const response = await preference.create({ body })
+
+        res.status(200).json({ id: response.id })
     } catch (error) {
+        console.error(error)
         next(error)
     }
 }
